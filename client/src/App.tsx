@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch, useLocation, Router as WouterRouter } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -180,7 +180,7 @@ function Navigation() {
   );
 }
 
-function Router() {
+function AppRouter() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -222,10 +222,12 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
-          <div className="min-h-screen bg-black text-white">
-            <Navigation />
-            <Router />
-          </div>
+          <WouterRouter base="/belimitless">
+            <div className="min-h-screen bg-black text-white">
+              <Navigation />
+              <AppRouter />
+            </div>
+          </WouterRouter>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
@@ -233,3 +235,4 @@ function App() {
 }
 
 export default App;
+
